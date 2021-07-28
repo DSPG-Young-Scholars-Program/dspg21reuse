@@ -5,15 +5,6 @@ library(data.table)
 library(rsconnect)
 
 
-#to do 7/28
-  #remove and rename column names in results tab
-  #get all the charts needed for this app
-  #Try to add a chart and images to app
-  #Begin filling out methods portion
-  #Work on about section, detailing the project and the problem we are trying to solve
-
-
-
 
 
 ui <- fluidPage(
@@ -130,7 +121,7 @@ ui <- fluidPage(
              #end profiling tab------------------------------------------
 
 
-             navbarMenu("Data Sources and Methods",
+             #navbarMenu("Data Sources and Methods",
                         tabPanel(
                           "Data Sources",
                           h3("Data Sources", align = "center", style = "margin-bottom: 50px"),
@@ -157,51 +148,68 @@ ui <- fluidPage(
                         ),
 
 
-                        tabPanel("Methods",
-                                 h3("Methods", align = "center", style = "margin-bottom: 50px"),
+                        tabPanel("The Process",
+                                 h3("The Process", align = "center", style = "margin-bottom: 50px"),
                                  style = "margin-left: 120px;",
                                  style = "margin-top: 30px;",
                                  style = "margin-right: 120px;",
 
-                                   fluidRow(
-                                     column(3, h4("Cleaning")),
-                                     column(6, wellPanel(p(style = "font-size:15px","In order to match company names across all three dataset we had to make all the strings similar to each other to facilitate fuzzy matching. To accomplish this we used regular expressions, the string package and pandas' package. The first step in the process was to lowercase all the strings. Then, remove punctuations except for underscores, dashes, ampersands, percent and dollar symbols. Afterwards, we removed any parenthesis along with the content within the parentheses. We then removed single characters from the beginning and removed numbers, as numbers complicate the matching process. Additionally, we removed extra spaces between words, the prefix b, and any legal entities from the company name. This provided all three data sets to have similar words in the entries that would make matching companies that may have ")))
+                                   fluidRow(style = "margin-top:100px",
+                                     column(3, h4("Repository Profiling and Selections")),
+                                     column(6, wellPanel(p(style = "font-size:15px","The first step in our process this summer was to identify the data we wanted to collect and the repositories from which to collect the data. This goal was achieved in two main steps. First, we, along with the ISU team, profiled a total of 205 publicly accessible data repositories. When doing this, we recorded characteristics of the repositories, metrics they tracked, their accessibility, their usability for our research purposes, their size, and more. Characteristics include things like which fields the repositories focused on or whether they had integrated tools for facilitating reuse. Metrics they tracked included more obvious metrics like downloads and more unique metrics like altmetrics, which track a piece of research's presence on online platforms. A main consideration when evaluating accessibility was whether the repository required registration or an account for a user to reuse the datasets. To evaluate the repositories' usability for our purposes, we made a note of the APIs they offered and how they could help our research. Finally, we prioritized larger repositories, as measured by the number of datasets or other projects, such as articles or book chapters, they contained. After considering all of these factors, we chose and ultimately analyzed 5 repositories: NSF PAR, Figshare, Dryad, KNB, and ICPSR.")))
                                    ),
                                    hr(),
                                    fluidRow(style = "margin-top:100px",
-                                            column(3, h4("Fuzzy Matching")),
-                                            column(6, wellPanel(p(style = "font-size:15px","To complete the fuzzy matching, we used a package by SeatGeeks called FuzzyWuzzy. FuzzyWuzzy uses the Levenshtein distance to calculate the minimum number of single character edits (insertions, deletions or substitutions) needed to change one word to another. The package contains several functions that produces a similarity ratio out of 100. The fuzz.ratio function calculates the ratio by using the basic Levenshtein distance and the equation from diff.libratio: 2*M / T, where T is the total number of characters in both strings and M is the number of matches. The fuzz.partial_ratio compares the shortest string (n) against all the n-length substrings of the larger string and returns the highest fuzz partial ratio. Therefore, if the shortest string is found within the larger string then the partial ratio will return a ratio of 100. For our purposes, we focused on a fuzz.ratio that would only produce 100 or perfect matches.  ")))
+                                            column(3, h4("Literature Review")),
+                                            column(6, wellPanel(p(style = "font-size:15px","The second step for identifying the information we wanted to collect was to compare our repository profiling results to recommendations in the literature. We based our literature review on three main, recent articles: Fecher et. al. (2015), Koesten et. al. (2020), and Thanos (2015). We compiled a list of specific recommendations and common themes. This process highlighted the roles technology, policy, and culture can play in fostering data reuse. While the focus of our research this summer was on the technology side, this information guided the direction of our researh and supplemented our analyses and interpretations of our findings.  ")))
                                    ),
                                    hr(),
                                    fluidRow(style = "margin-top:100px",
-                                            column(3, h4("Network Analysis")),
-                                            column(7, h4("")))
+                                            column(3, h4("Web Scraping")),
+                                            column(6, wellPanel(p(style = "font-size:15px","Before we could do any quantitative analyses, we needed data. We used the R packages rvest and RSelenium, along with the sites' APIs, to collect our samples. The functions contained within rvest ultimately allowed us to extract most of the information we needed from our sites. However, in most cases we needed to use RSelenium in order to allow the websites to fully load before scraping them. This is because the sites initially loaded empty shells, so scraping immediately with rvest returned null results. These two R packages, rvest and RSelenium, allowed us to scrape one site at a time, so we built our code into for loops to scrape thousands of data sets. To get our desired datasets and websites, we used the repositories' APIs.   ")))
+                                   ),
+                                   hr(),
+                                   fluidRow(style = "margin-top:100px",
+                                            column(3, h4("Analyses")),
+                                            column(6, wellPanel(p(style = "font-size:15px","Since each repository tracked some unique information, analyses by repository varied to some extent. More detailed information can be found in the Results section. However, for almost all repositories, downloads, citations, are views were tracked. We started our analyses by compiling descriptive statistics on these three important metrics of reuse. We also calculated correlations for these three metrics for each repository. After that point, analyses diverged. We used the other information that the repositories tracked, such as metadata analysis reports, file sizes, and numbers of keywords, to build models to predict downloads, citations, and views. We also did more qualitative analyses on the repositories as a whole. Finally, when possible, we graphed the dates of datasets being uploaded to see how the culture of data sharing has changed over time. These are just a few of the total analyses we performed.   "))))
 
 
 
 
-                        )),#end navbar
+                        ),#),#end navbar
 
              #end Data Sources and Methods tabs-----------------
 
 
              navbarMenu("Results",
-                        tabPanel("Within Data Matching",
+                        tabPanel("NSF PAR",
                                  selectInput("within", "Select", choice = c("NDCxNDC", "FDAxFDA", "DNAxDNA")),
                                  dataTableOutput("withinData")
                         ),
 
 
-                        tabPanel("Across Data Matching",
+                        tabPanel("Figshare",
                                  selectInput("across", "Select", choices = c("FDAxNDC", "FDAxDNA", "DNAxNDC")),
                                  dataTableOutput("AcrossData")
 
 
 
                         ),
-                        tabPanel("Network Analysis")
+                        tabPanel("Dryad"
+                        ),
+                        
+                        
+                        tabPanel("KNB"
+                        ),
+                        
+                        
+                        tabPanel("ICPSR")
+                        
 
                         )#end results tab
+
+
+
 
 
       ) #end navbarPage
