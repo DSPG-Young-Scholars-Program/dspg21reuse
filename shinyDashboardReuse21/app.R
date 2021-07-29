@@ -46,68 +46,14 @@ research (producer communities); in other words, the ease of use of data collect
 
              
 
-             tabPanel("Profiling and Choosing Repositories",style = "margin:45px",
-                      fluidRow(
-                        column(3, tags$img(height = "80%", width = "80%", src = "biilogo.png")),
-                        column(6, h1("Profiling and Choosing Repositories")),
-                        column(3, tags$img(height = "80%", width = "80%", src = "partnerlogos.png", align = "right"))
-                      ),
-                      
-                      p("One of our project’s preliminary steps in the Data Discovery process was finding repositories in which Publicly Accessible Research Data (PARD) is available. To this end, we were able to utilize the Open Access Directory, a collection of lists about open access (OA) to science and scholarship, maintained by the OA community at large. This list holds 204 repositories spanning a wide range of subject fields and can be accessed ",
-                        tags$a(href="http://oad.simmons.edu/oadwiki/Data_repositories.", "here."), style = "color:#232D4B"),
-                      
-                      p("Prior to the step of Data Screening and profiling this list of 204 repositories, our team conducted a literature review of articles on the subject of data reusability to understand the recent progress made towards open science and the challenges that exist in the domain. Our literature review suggested, among other valuable lessons, that solutions to address these goals can be pursued not only at the data level, but at the repository level with basic metrics for reuse and more sophisticated technological features. ", style = "color:#232D4B"),
-                      
-                      p("With this knowledge of the relevant literature, and working in conjunction with the Iowa State University team, we profiled these 204 repos on the basis of our evaluation framework, namely:"),
-                      
-                      p("1. Does the repository report the number of downloads, citations, views, or other metrics for datasets?"),
-                      
-                      p("2. How many datasets are in the repository/ what is the size of the repository?"),
-                      
-                      p("3. Is the repository widely accessible and has ease of use? Does the site require registration to access data?"),
-                      
-                      p("4. Does the repository have other interesting features that can be analyzed for their impact and/or association with data reuse?"),
-                      
-                      p("After completing this profiling process, our team selected 6 repositories to study, with each team member picking two of their own repositories to scrape. These 6 repositories were chosen, as previously mentioned, for their tracking of metrics of reuse, their size, their ease of access, and additionally, interesting features they displayed that could be used in our analysis of reuse. For example, the Multidisciplinary Repository Dryad contained a useful tool relating to the scope of our project, “Data (re)Usage Instructions.” This tool… Another example of such a feature was the “Metadata Assessment Report” from the Ecology and Biology repository the Knowledge Network for Biocomplexity (KNB). This site ran its own analysis on metadata associated with each research study, performing metadata “checks” on aspects of the metadata such as  if a methodology section is present, and if a unique identifier exists for the study."),
-                      
-                      p("This table here provides an overview of 5 of the 6 repositories our team from UVA chose to analyze."),
-                      
-                      ##INSERT VISUALS
-                      
-                      p("These were just the repositories UVA analyzed. ISU also analyzed other repositories. Their site, along with a brief overview of their work, can be found in the ISU tab.")
-                      
-                      
-             ),
+
 
 
              #end profiling tab------------------------------------------
 
 
              #navbarMenu("Data Sources and Methods",
-                        tabPanel(
-                          "Data Sources",
-                          h3("Data Sources", align = "center", style = "margin-bottom: 50px"),
-                          style = "margin-left: 120px;",
-                          style = "margin-top: 30px;",
-                          style = "margin-right: 120px;",
-                          fluidRow(
-                            column(3, tags$img(height = "100%", width = "100%",src = "dnalogo.png")),
-                            column(6, wellPanel(p(style = "font-size:15px","The Dow Jones DNA platform collects information from Dow Jones publication with premium and licensed third party sources. This proprietary data platform contains 1.3bn articles each labeled with unique DNA taxonomies tags including word count, source name, and company code. More information on all the included data tags can be found on the DNA website. This dataset served as the primary resource for alternative text sources and will inspire the machine learning algorithms that will predict innovation. "))),
-                            ),
-                          hr(),
-                          fluidRow(style = "margin-top:100px",
-                                   column(3, tags$img(height = "100%", width = "100%", src = "fdalogo.png")),
-                                   column(7, wellPanel(
-                                     tags$b("Approvals"),
-                                     p(style = "font-size:15px", "FDA drug approvals dataset generated and reviewed by FDA and includes information regarding. ",
-                                     br(),
-                                     br(),
-                                     tags$b("National Drug Code"),
-                                     p(style = "font-size:15px", "The National Drug Code (NDC) Directory is a publicly available source provided by the FDA that contains a list of all current drugs manufactured, prepared, propagated, compounded, or processed for commercial distribution. The data content is manually inputted by the companies producing the drugs as required per the Drug Listing Act of 1972. The FDA assigns the NDC – a unique three-digit number, to the drug products. The administration then updates the NDC directory daily with the NDC along with the rest of the information provided. We gathered content from this dataset on [enter date here]. This data was used to cross-validate the companies that we had previously identified as producing an innovation. ")
-                                    )))
-                          ),
-
-                        ),
+                        
 
 
                         tabPanel("The Process",
@@ -142,30 +88,131 @@ research (producer communities); in other words, the ease of use of data collect
 
              #end Data Sources and Methods tabs-----------------
 
-
+             tabPanel("Profiling and Choosing Repositories",style = "margin:45px",
+                      fluidRow(
+                        column(3, tags$img(height = "80%", width = "80%", src = "biilogo.png")),
+                        column(6, h1("Profiling and Choosing Repositories")),
+                        column(3, tags$img(height = "80%", width = "80%", src = "partnerlogos.png", align = "right"))
+                      ),
+                      
+                      p("One of our project’s preliminary steps in the Data Discovery process was finding repositories in which Publicly Accessible Research Data (PARD) is available. To this end, we were able to utilize the Open Access Directory, a collection of lists about open access (OA) to science and scholarship, maintained by the OA community at large. This list holds 204 repositories spanning a wide range of subject fields and can be accessed ",
+                        tags$a(href="http://oad.simmons.edu/oadwiki/Data_repositories.", "here."), style = "color:#232D4B"),
+                      
+                      p("Prior to the step of Data Screening and profiling this list of 204 repositories, our team conducted a literature review of articles on the subject of data reusability to understand the recent progress made towards open science and the challenges that exist in the domain. Our literature review suggested, among other valuable lessons, that solutions to address these goals can be pursued not only at the data level, but at the repository level with basic metrics for reuse and more sophisticated technological features. ", style = "color:#232D4B"),
+                      
+                      p("With this knowledge of the relevant literature, and working in conjunction with the Iowa State University team, we profiled these 204 repos on the basis of our evaluation framework, namely:"),
+                      
+                      p("1. Does the repository report the number of downloads, citations, views, or other metrics for datasets?"),
+                      
+                      p("2. How many datasets are in the repository/ what is the size of the repository?"),
+                      
+                      p("3. Is the repository widely accessible and has ease of use? Does the site require registration to access data?"),
+                      
+                      p("4. Does the repository have other interesting features that can be analyzed for their impact and/or association with data reuse?"),
+                      
+                      p("After completing this profiling process, our team selected 6 repositories to study, with each team member picking two of their own repositories to scrape. These 6 repositories were chosen, as previously mentioned, for their tracking of metrics of reuse, their size, their ease of access, and additionally, interesting features they displayed that could be used in our analysis of reuse. For example, the Multidisciplinary Repository Dryad contained a useful tool relating to the scope of our project, “Data (re)Usage Instructions.” This tool… Another example of such a feature was the “Metadata Assessment Report” from the Ecology and Biology repository the Knowledge Network for Biocomplexity (KNB). This site ran its own analysis on metadata associated with each research study, performing metadata “checks” on aspects of the metadata such as  if a methodology section is present, and if a unique identifier exists for the study."),
+                      
+                      p("This table here provides an overview of 5 of the 6 repositories our team from UVA chose to analyze."),
+                      
+                      ##INSERT VISUALS
+                      
+                      p("These were just the repositories UVA analyzed. ISU also analyzed other repositories. Their site, along with a brief overview of their work, can be found in the ISU tab.")
+                      
+                      
+             ),
+             
+             
              navbarMenu("Results",
-                        tabPanel("NSF PAR",
-                                 selectInput("within", "Select", choice = c("NDCxNDC", "FDAxFDA", "DNAxDNA")),
-                                 dataTableOutput("withinData")
+                        tabPanel("NSF PAR"
                         ),
 
 
-                        tabPanel("Figshare",
-                                 selectInput("across", "Select", choices = c("FDAxNDC", "FDAxDNA", "DNAxNDC")),
-                                 dataTableOutput("AcrossData")
+                        tabPanel("Figshare"
 
 
 
                         ),
-                        tabPanel("Dryad"
+                        tabPanel("Dryad", style = "margin:20px",
+                                 h5("Background"),
+                                 br(),
+                                 br(),
+                                 br(),
+                                 p("Dryad is a community-driven, open-source multidisciplinary repository. Of the 41,000 datasets on the website, 
+                        each contains the number of downloads and views per dataset, as well as the number of publications the dataset was cited in and a link to the data’s original study. 
+                        For reference, there were an average of 41 downloads per dataset, and 107 views per dataset."),
+                                 br(),
+                                 p("Notably, dryad also provides data usage, or (re)usage notes: if a researcher wants 
+                        to use data posted to dryad in their own study, he or she can read the usage notes provided with the data to understand what 
+                        packages and software are needed to read the data, or what steps can be taken to best prepare the data for analysis. 
+                        The graph below depicts the number of datasets published to dryad over time from our sample of 3400 datasets,
+                        spanning from 2007 to 2021. We see that over time, there is an increase in data sharing, quantified by the number of datasets published.
+                        "),
+                                 
+                                 h5("Visuals"),
+                                 br(),
+                                 br(),
+                                 br(),
+                                 img(src = "dryad_graph.png", height = 600, width = 1000),
+                                 
                         ),
                         
                         
-                        tabPanel("KNB"
+                        tabPanel("KNB", style = "margin:20px",
+                                 h5("Background"),
+                                 br(),
+                                 br(),
+                                 br(),
+                                 p("KNB, or the Knowledge Network for Biocomplexity, is an Ecology and Biology Repository with about 30,000 uploads. Our team took particular interest in KNB because of its Metadata Assessment Report feature,  a tool that performs an analysis on the metadata associated with each research study.
+                        This Metadata Assessment Report performs on average, 23 checks of metadata, checking information such as, if a methodology section is present, and if a unique identifier exists for the study. An example of such a report looks like this:"),
+                                 br(),
+                                 img(src="knb_example.png", height = 600, width = 1000),
+                                 br(),
+                                 br(),
+                                 p("To perform this analysis, we scraped a random 5,000 set of studies from the site, and collected Downloads, Views, and Citations, along with information on these metadata checks. In summary, this random sample average about 16 downloads per each dataset and each dataset had about 3 failures.
+                        In understanding the importance of providing quality metadata in order to make data reusable, we would expect to see that failed checks were negatively associated with downloads, and this is, in fact, what we observed after performing a simple regression of using the number of failures to predict downloads. We got a coefficient of -7.5 that is highly significant at less than a .01 percent level. 
+                        The graph below displays the total failure count, divided by the type of failure, and we can see the most common failures being the absence of a license, a publishing date not present, and the abstract length not being sufficiently long."),
+                                 br(),
+                                 img(src="knb_graph.png", height = 600, width = 1000),
+                                 br(),
+                                 br(),
+                                 p("This metadata assessment report feature holds much value for the topic of data reuse. It is of worth for both data publishers and data re-users,  as publishers are able to upload their research to KNB, and then observe, from the assessment report, which areas of their metadata is lacking. Conversely, data re-users can screen data before attempting to use them by first determining if sufficient information about the data is present. 
+                        As a whole, this analysis on a sample set of studies shows the potential of such a tool for repositories with publicly accessible research data.  These methods can be replicated across repositories that have similar assessment tools, and provide insight into uncovering the specific and most glaring gaps in the reusability framework, and which policies and standards can be prioritized moving forward. "),
+                                 br(),
+                                 br(),
+                                 br(),
+                                 
+                                 
                         ),
                         
+                        tabPanel("ICPSR", style = "margin:20px",
+                                 h5("Background"),
+                                 br(),
+                                 br(),
+                                 br(),
+                                 p("ICPSR, the International Consortium for Political and Social Research, was another repository our team profiled. We were introduced to ICPSR during our reusability workshops, that we held in June, by a researcher from the University of Michigan, who attested to the standards of reuse upheld by ICPSR. After examining study-level Metadata in ICPSR, this was clearly evident — each study’s metadata are available in any of three formats, DDI 2.5, Dublin Core, and DATS 2.2, corresponding to the Data Documentation Initiative, the Dublin Core Metadata Initiative, and the Data Tags Suite, respectively.
                         
-                        tabPanel("ICPSR")
+                        ICPSR’s search capabilities allow for sorting by the most cited datasets, and we collected data on the 3,000 most cited datasets on the site, collecting downloads, and publications, along with information on the Versioning, Principal Investigator, and Funding Agency. 
+                        
+                        For context, these datasets were highly reused, averaging 1860 downloads and 54 publications per dataset.
+                        
+                        The graph below shows a visual representation of the average publications per dataset by the top funding agencies in the 3000 study sample set. As you can see, the visualization highlights the relationship between the type of funding agency, like the social science agency of the NSF and a repository in which its datasets can be found. "),
+                                 br(),
+                                 img(src="icpsr_graph.png", height = 600, width = 1000),
+                                 br(),
+                                 br(),
+                                 br(),
+                                 p("Similar analyses on other repositories can reveal valuable information about the reuse and impact of the studies that agencies fund.
+
+                        Additionally, another interesting and relevant feature of ICPSR is its “Usage Report,” parts of which, are displayed below. Users can create an account on ICPSR and log their affiliations with the member institution they belong to and the type of user they are, and this information is then displayed on the usage report of studies. A gap that is often unable to be filled with most publicly accessible research data and a deterrent to data sharing, this can provide valuable insight to data publishers as they are able to understand who exactly is viewing and reusing their data."),
+                                 
+                                 h5("Visuals"),
+                                 br(),
+                                 br(),
+                                 br(),
+                                 img(src = "icpsr_example1.png", height = 600, width = 1000),
+                                 img(src = "icpsr_example2.png", height = 600, width = 1000),
+                                 
+                        )
                         
 
                         )#end results tab
