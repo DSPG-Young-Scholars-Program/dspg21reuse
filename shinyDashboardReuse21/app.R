@@ -10,114 +10,76 @@ library(rsconnect)
 ui <- fluidPage(
   theme ="themes.css",
 
-  navbarPage(title = span("Business Innovation", style = "color:#232D4B"),
+  navbarPage(title = span("Data Reusability", style = "color:#232D4B"),
              tabPanel("About",style = "margin:45px",
                       fluidRow(
                         column(3, tags$img(height = "80%", width = "80%", src = "biilogo.png")),
-                        column(6, h1("Business Innovation")),
+                        column(6, h1("Data Reusability")),
                         column(3, tags$img(height = "80%", width = "80%", src = "partnerlogos.png", align = "right"))
                       ),
 
                       h5("SDAD/DSPG"),
-                      p("The Social and Decision Analytics Division (SDAD) is one of three research divisions within the Biocomplexity Institute and Initiative at the University of Virginia.
-                        SDAD combines expertise in statistics and social and behavioral sciences to develop evidence-based research
-                        and quantitative methods to inform policy decision-making and evaluation.
-                        The researchers at SDAD span many disciplines including statistics, economics, sociology, psychology,
-                        political science, policy, health IT, public health, program evaluation, and data science.
-                        The SDAD office is located near our nation's capital in Arlington, VA. You can learn more about us at",
-                        tags$a(href="https://biocomplexity.virginia.edu/social-decision-analytics.", "https://biocomplexity.virginia.edu/social-decision-analytics."), style = "color:#232D4B"),
-                      p("The Data Science for the Public Good (DSPG) Young Scholars program is a summer immersive program held at SDAD. Entering its seventh year, the program engages students from across the country
-                        to work together on projects that address state, federal, and local government challenges around critical social issues relevant in the world today.
-                        DSPG young scholars conduct research at the intersection of statistics, computation, and the social sciences to determine how information
-                        generated within every community can be leveraged to improve quality of life and inform public policy. ", style = "color:#232D4B"),
-                      h5("DSPG20BI Summer Project"),
-                      p("The DSPG20BI team is one of x number of teams within the larger DSPG program tasked with looking into detecting product innovation within non-traditional data sources.
-                        Our goal is to find instances of product innovation within the pharmaceutical industry thorugh niche natural-language processessing techniques in an attempt
-                        to supplement the current measure of innovation", tags$a(href = "https://www.nsf.gov/statistics/srvyindustry/about/brdis/", "the Business R&D and Innovation Survey (BRDIS)"),"conducted by The National Science Foundation."),
+                      p("The Social and Decision Analytics Division (SDAD) is one of three research divisions within the Biocomplexity Institute and Initiative at the University of Virginia. SDAD combines expertise in statistics and social and behavioral sciences to develop evidence-based research and quantitative methods to inform policy decision-making and evaluation. The researchers at SDAD span many disciplines including statistics, economics, sociology, psychology, political science, policy, health IT, public health, program evaluation, and data science. The SDAD office is located near our nation's capital in Arlington, VA. You can learn more about us",
+                        tags$a(href="https://biocomplexity.virginia.edu/social-decision-analytics.", "here."), style = "color:#232D4B"),
+                      
+                      p("The Data Science for the Public Good (DSPG) Young Scholars program is a summer immersive program held at SDAD. Entering its eighth year, the program engages students from across the country to work together on projects that address state, federal, and local government challenges around critical social issues relevant in the world today. DSPG young scholars conduct research at the intersection of statistics, computation, and the social sciences to determine how information generated within every community can be leveraged to improve quality of life and inform public policy. ", style = "color:#232D4B"),
+                      
+                      h5("Data Reusability"),
+                      p("Data reusability refers to the ease of using data for legitimate scientific research by one or
+more communities of research (consumer communities) that is produced by other communities of
+research (producer communities); in other words, the ease of use of data collected for one purpose to study a new problem. As data reusability becomes a distinct characteristic of modern scientific practice comes the mandate for public access to research data, and a push towards transparent research practices that transform the way we conduct research across scholarly fields.  However, disciplines vary widely in their readiness to adopt these new practices, and research institutions face the daunting prospect of determining how to encourage better research practices for researchers from any discipline. While best practices in sharing data are now centered on the FAIR principles (findable, accessible, interoperable, reusable), limited attention has been paid to what actually makes a data source reusable by another researcher. 
+"),
 
-                      p("During the 10-week DSPG program, the Business Innovation team focused on developing functions that used NLP techniques to match strings across datasets.
-                        These functions were written particularly focused on datasets mentioning innovation amongst pharmaceutical companies. However, the functions can be applied to any dataset containing strings.
-                        The goal of this task it to provide future insights on the companies doing innovation as it pertains to the OLSO manual definition"),
+                      p("In this project, we:"),
+                      p("1. Develop and pilot test a framework that articulates the concept of the “reusability” of a data source from the perspective of a user and is extensible across scholarly disciplines;"),
+                      p("2. Identify practices for planning and conducting a research study that will increase the reusability of the data shared from the investigation, as well as reduce the burden in creating and appropriately using the data source; and"),
+                      p("3. Propose a path forward for accelerating community readiness and the success of researchers in effectively producing a publicly accessible data product that readily enables a new user to evaluate and appropriately analyze the data source."),
+                      p("By better understanding of the reusability of a shared research data source, researchers from a range of disciplines, especially those without a data sharing tradition, will be able to improve their planning and execution in producing research data intended for public access, thereby increasing the rigor of research studies and shared data products.By providing a pathway forward for increasing our capacity to produce more reusable data sources, this work provides information desperately needed by research institutions and other organizations to accelerate community readiness for developing and appropriately sharing high quality reusable research data sources."),
 
                       h5("Our Team"),
-                      p("SDAD: Devika Mahoney-Nair, Gizem Korkmaz, & Neil Alexander"),
-                      p("DSPG: Susweta Ray (Fellow), Isabel Gomez (Intern), Ian MacLeod (Intern)"),
-                      p("Sponsor: Gary Anderson, National Science Foundation (NSF), National Center for Science and Engineering (NCSES)")
+                      p("SDAD: Alyssa Mikytuck, Gizem Korkmaz"),
+                      p("DSPG: Emily Kurtz (Fellow), Akilesh Ramakrishna (Intern), Aditi Mahabal (Intern)"),
+                      p("Sponsor: Gary Anderson, National Science Foundation (NSF)")
 
 
                       ),
 
-             #ui
-             navbarMenu("Profiling",
+             
 
-             tabPanel("Publishers", style = "margin:20px",
-                      h5("Visuals"),
-                      br(),
-                      br(),
-                      br(),
-                      sidebarLayout(
-                        sidebarPanel(
-                          h4("Top Publishers"),
-                          selectInput("year", "Year", choices = c(2013, 2014,2015,2016,2017,2018))),
-                        mainPanel(
-                          imageOutput("pub"))
-                      )
-
+             tabPanel("Profiling and Choosing Repositories",style = "margin:45px",
+                      fluidRow(
+                        column(3, tags$img(height = "80%", width = "80%", src = "biilogo.png")),
+                        column(6, h1("Profiling and Choosing Repositories")),
+                        column(3, tags$img(height = "80%", width = "80%", src = "partnerlogos.png", align = "right"))
                       ),
+                      
+                      p("One of our project’s preliminary steps in the Data Discovery process was finding repositories in which Publicly Accessible Research Data (PARD) is available. To this end, we were able to utilize the Open Access Directory, a collection of lists about open access (OA) to science and scholarship, maintained by the OA community at large. This list holds 204 repositories spanning a wide range of subject fields and can be accessed ",
+                        tags$a(href="http://oad.simmons.edu/oadwiki/Data_repositories.", "here."), style = "color:#232D4B"),
+                      
+                      p("Prior to the step of Data Screening and profiling this list of 204 repositories, our team conducted a literature review of articles on the subject of data reusability to understand the recent progress made towards open science and the challenges that exist in the domain. Our literature review suggested, among other valuable lessons, that solutions to address these goals can be pursued not only at the data level, but at the repository level with basic metrics for reuse and more sophisticated technological features. ", style = "color:#232D4B"),
+                      
+                      p("With this knowledge of the relevant literature, and working in conjunction with the Iowa State University team, we profiled these 204 repos on the basis of our evaluation framework, namely:"),
+                      
+                      p("1. Does the repository report the number of downloads, citations, views, or other metrics for datasets?"),
+                      
+                      p("2. How many datasets are in the repository/ what is the size of the repository?"),
+                      
+                      p("3. Is the repository widely accessible and has ease of use? Does the site require registration to access data?"),
+                      
+                      p("4. Does the repository have other interesting features that can be analyzed for their impact and/or association with data reuse?"),
+                      
+                      p("After completing this profiling process, our team selected 6 repositories to study, with each team member picking two of their own repositories to scrape. These 6 repositories were chosen, as previously mentioned, for their tracking of metrics of reuse, their size, their ease of access, and additionally, interesting features they displayed that could be used in our analysis of reuse. For example, the Multidisciplinary Repository Dryad contained a useful tool relating to the scope of our project, “Data (re)Usage Instructions.” This tool… Another example of such a feature was the “Metadata Assessment Report” from the Ecology and Biology repository the Knowledge Network for Biocomplexity (KNB). This site ran its own analysis on metadata associated with each research study, performing metadata “checks” on aspects of the metadata such as  if a methodology section is present, and if a unique identifier exists for the study."),
+                      
+                      p("This table here provides an overview of 5 of the 6 repositories our team from UVA chose to analyze."),
+                      
+                      ##INSERT VISUALS
+                      
+                      p("These were just the repositories UVA analyzed. ISU also analyzed other repositories. Their site, along with a brief overview of their work, can be found in the ISU tab.")
+                      
+                      
+             ),
 
-             tabPanel("Profiles", style = "margin:60px",
-                      h5("Profiling", align = "center"),
-                      p(style = "margin-top:25px","Profiling is essential for ensuring the contents of datasets align with the projects overall goal and resources. The first goal of the Business Innovation project is to obtain a general understanding of what companies are the ones producing recent innovation. Therefore, we profiled the DNA data to include only unique, complete and valid entries.  We defined a valid entry, as an article that was published after 2010, had more than 100 but less than 10,000 characters and had a company code that was in the company codes dictionary. The year restriction will allow us to only consider recent innovations, the character restriction will allow our computing resources to fully analyze the text and the company code restriction will ensure that we have the full name of the company which will provide better insights on the companies completing innovation. " ),
-                      br(),
-                      p("Originally, the dataset contained 1,942,855 data entries. Given a restriction on memory and running power, we decided to only have unique and complete entries as it diminished the dataset by 96.2% to 73, 688 entries, while still fulfilling our main goal of understanding what companies are producing innovation. The visualization [above/below] demonstrates the total percentage of data entries that passed our validity checks.  About 78.3% of the total unique entries passed the validity check, 100% of the entries were published after 2010, and 91.7% of the entries contained valid company codes.  "),
-                      sidebarLayout(
-                        sidebarPanel(
-                          width = 6,
-                          selectInput("selectTable", "Select", choices = c("Completeness, Uniqueness, Duplicates", "Validity")),
-                          h4("Definitions: ", style = "margin-top:50px"),
-                          helpText("Note: All definitions are provided by Dow Jones Developer Platform"),
-                          tags$ul(
-                            tags$li("an - Accession Number (Unique id)"),
-                            tags$li("art: Caption text and other descriptions of images and illustrations"),
-                            tags$li("action: Action perfomed on a document (ex. add, rep, del)"),
-                            tags$li("body: The content of the article"),
-                            tags$li("byline: The author of an article"),
-                            tags$li("copyright: Copyright text"),
-                            tags$li("credit: Attribution text"),
-                            tags$li("currency_codes: Currencies"),
-                            tags$li("dateline: Place of origin and date"),
-                            tags$li("document_type: Document type (ex. article, multimedia, summary"),
-                            tags$li("ingestion_datetime: Data and time the artile was added to the Dow Jones Developer Platfrom"),
-                            tags$li("language_code: Code for teh published language (ex. en)"),
-                            tags$li("modification_datetime: Data and time that the article was modified"),
-                            tags$li("modification_date: Date in which the article was last modified"),
-                            tags$li("publication_date: Date in which the article was published"),
-                            tags$li("publication_datetime: Date and time in which the article was published"),
-                            tags$li("publisher_name: Publisher name"),
-                            tags$li("region_of_origin: Publisher's region of origin"),
-                            tags$li("snippet: What you see of an article outiside the paywall"),
-                            tags$li("source_code: Publisher code"),
-                            tags$li("source_name: Name of the source"),
-                            tags$li("title: Title text"),
-                            tags$li("word_count: Document word count"),
-                            tags$li("subject_codes: News subjects"),
-                            tags$li("region_codes: Region codes (ex. usa, namz, etc"),
-                            tags$li("industry_codes: Industry codes"),
-                            tags$li("person_codes: Persons"),
-                            tags$li("market_index_codes: Market indices"),
-                            tags$li("company_codes: Factiva IDs for companies and organizations"),
-                            tags$li("company_codes_about: Companies that have high relevance to the document"),
-                            tags$li("company_codes_association: Companies added to the document because of a relationship other than parent/child"),
-                            tags$li("company_codes_lineage: Companies added to the document because of a parent/child relationship to another company"),
-                            tags$li("company_codes_occur: Companies mentioned in the document but that do not necessarily have a high relevance to it"),
-                            tags$li("company_codes_relevance: Companies added to the document because they have a certain degree of relevance to it")
 
-                          )
-
-                        ),
-                        mainPanel(width = 3, tableOutput("tables"))
-                      ))
-),
              #end profiling tab------------------------------------------
 
 
