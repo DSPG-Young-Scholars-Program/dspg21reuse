@@ -134,15 +134,27 @@ ggplot(boxplots,aes(x=License,y=Downloads))+
   xlab("License") + ylab("Number of Downloads") + theme(plot.title = element_text(hjust = 0.5))
 
 #license pie chart
-ggplot(data,aes(x="",y=License))+
-  geom_bar(stat="identity", width=1) +
-  coord_polar("y", start=0)
-         
+#ggplot(boxplots,aes(x="",y=License))+
+#  geom_bar(stat="identity", width=1) +
+#  coord_polar("y", start=0)
+slices<-table(boxplots$License)       
+lbls<-c("CC BY","CC BY-NC","CC BY-NC-ND","CC BY-NC-SA","CC BY-ND","CC BY-SA","CC BY + CC0","CC0")
+pie(slices,lbls,col=rainbow(length(lbls)),main="Creative Commons Chosen Licenses in Figshare Sample")
+#break down all small six to "other"
+slices<-c(sum(slices[2:7]),slices[1],slices[8])
+lbls<-c("CC BY","Other","CC0")
+pie(slices,lbls,col=c("#E57200","green","#232D4B"),main="Creative Commons Chosen Licenses in Figshare Sample")
 
 
-ggplot(data = dryad, aes(x = pub_date)) +
-  geom_bar(color = "#E57200") + ggtitle("Datasets Published to Dryad Over Time") +
-  xlab("Date") + ylab("Number of datasets") + theme(plot.title = element_text(hjust = 0.5))
+#collapse further
+boxplots$License[(boxplots$License!="CC BY")&(boxplots$License!="CC0")]<-"Other"
+ggplot(boxplots,aes(x=License,y=Downloads))+
+  geom_boxplot(fill = "#E57200")+
+  ylim(0,2500)+
+  ggtitle("Downloads by Creative Commons License") +
+  xlab("License") + ylab("Number of Downloads") + theme(plot.title = element_text(hjust = 0.5))
+
+
 
 
 licensetest<-aov(Downloads~as.factor(License),data=data)

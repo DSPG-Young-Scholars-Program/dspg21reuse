@@ -172,7 +172,9 @@ research (producer communities); in other words, the ease of use of data collect
                                  br(),
                                  p("Licenses were also of interest. The literature argues that potential data donors are sometimes hesitant to share their data for fear that they will lose control over it or that other researchers will use it incorrectly. Licenses could potentially allay some of those fears by giving some control back to the donor. Licenses could, in these ways, affect both the donor and user. Do donors tend to choose more restrictive licenses? Do users download datasets with less restrictive licenses more frequently?"),
                                  img(src = "fig_license_downloads.png", height = 600, width = 1000),
-                                 img(src = "fig_license_downloads.png", height = 600, width = 1000),
+                                 img(src = "figlicenseschosen.png", height = 600, width = 1000),
+                                 img(src = "licenseDownloadsCollapsed.png", height = 600, width = 1000),
+                                
                                  
                         ),
                         tabPanel("Dryad", style = "margin:20px",
