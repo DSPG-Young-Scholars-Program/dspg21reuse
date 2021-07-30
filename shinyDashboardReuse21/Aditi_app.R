@@ -6,7 +6,7 @@ library(rsconnect)
 
 
 #to do 7/28
-  #remove and rename column names in results tab
+  #remove and rename column names in results tabb
   #get all the charts needed for this app
   #Try to add a chart and images to app
   #Begin filling out methods portion
@@ -79,7 +79,7 @@ spanning from 2007 to 2021. We see that over time, there is an increase in data 
                       br(),
                       br(),
                       br(),
-                      img(src = "dryad_graph.png", height = 600, width = 1000),
+                      img(src = "dryad_pubs_per_year.png", height = 600, width = 1000),
 
                       ),
 
