@@ -95,6 +95,55 @@ data$KeywordBin[data$NumberOfKeywords>8]<-"Group 4: 9 or more"
 barplot(aggregate(Downloads~KeywordBin,data,mean)$Downloads, names.arg=c("Up to 3","4 to 5","6 to 8","9 or more"),
         main="Total Downloads by Number of Keywords",xlab="Keyword Quartile",ylab="Downloads")
 
+keywordsframe<-aggregate(Downloads~KeywordBin,data,mean)$Downloads
+keywordsframe<-as.data.frame(keywordsframe)
+colnames(keywordsframe)<-"Downloads"
+wordbins<-c("1. Up to 3","2. 4 to 5","3. 6 to 8","4. 9 or more")
+wordbins<-as.data.frame(wordbins)
+colnames(wordbins)<-"Group"
+figkeys<-cbind(wordbins,keywordsframe)
+
+
+ggplot(data=figkeys, aes(x=Group,y=Downloads))+
+       geom_bar(stat="identity",fill="#E57200")+
+       geom_text(aes(label=round(Downloads)),color="black",vjust=0,size=4)+
+       ggtitle("Average Total Downloads Per Dataset by Number of Keywords") +
+       xlab("Keywords") + ylab("Downloads") +
+       scale_x_discrete(labels=c("Up to 3","4 to 5","6 to 8","9 or more")) +
+       theme(legend.position = "none",
+         plot.title = element_text(hjust=0.5,face="bold",size=15),
+         axis.text.x=element_text(color = "black", size=9, angle=35, vjust=.8, hjust=0.8),
+         axis.title.x = element_text(size=12),
+         axis.title.y = element_text(size=12)
+  )
+
+
+
+#license boxplots
+boxplots<-data[,c(3,7)]
+boxplots<-boxplots[grep("CC",data$License),]
+boxplots$License<-gsub(" 4.0","",boxplots$License)
+boxplots$License<-gsub(" 3.0","",boxplots$License)
+boxplots$License<-gsub(" 1.0","",boxplots$License)
+table(boxplots$License)
+#license downloads
+ggplot(boxplots,aes(x=License,y=Downloads))+
+  geom_boxplot(fill = "#E57200")+
+  ylim(0,2500)+
+  ggtitle("Downloads by Creative Commons License") +
+  xlab("License") + ylab("Number of Downloads") + theme(plot.title = element_text(hjust = 0.5))
+
+#license pie chart
+ggplot(data,aes(x="",y=License))+
+  geom_bar(stat="identity", width=1) +
+  coord_polar("y", start=0)
+         
+
+
+ggplot(data = dryad, aes(x = pub_date)) +
+  geom_bar(color = "#E57200") + ggtitle("Datasets Published to Dryad Over Time") +
+  xlab("Date") + ylab("Number of datasets") + theme(plot.title = element_text(hjust = 0.5))
+
 
 licensetest<-aov(Downloads~as.factor(License),data=data)
 summary(licensetest)
