@@ -123,14 +123,55 @@ research (producer communities); in other words, the ease of use of data collect
              
              
              navbarMenu("Results",
-                        tabPanel("NSF PAR"
-                        ),
+                        tabPanel("NSF PAR", style = "margin:20px",
+                                          h5("Background"),
+                                          br(),
+                                          br(),
+                                          br(),
+                                          p("NSF PAR is a repository with a science focus. It contains around 130,000 total published pieces of research. NSF PAR is in many ways unlike the other repositories we chose to analyze. It does not track downloads, citations, or views. Furthermore, the majority of results it stores are not datasets, but are instead peer reviewed publications. Finally, it does not store its results directly, but instead include its results’ metadata and a link to an external repository where a user can access the entire document. However, the metadata still offered a lot for us to analyze. "),
+                                          br(),
+                                          img(src="icpsr_graph.png", height = 600, width = 1000),
+                                          br(),
+                                          br(),
+                                          br(),
+                                          p("NSF PAR allows users to sort results by date and by relevance. In order to collect our sample, we sorted by relevance and collected metadata information on the 5,000 most relevant pieces of research. Relevance is a proxy for views, as it is related to clicks. We did not filter at all on search terms in order to include all possible topics and instead searched over all possible results by simply filtering on date, including all possible dates."),
+                                          br(),
+                                 
+                                          p("The metadata we collected offered us the ability to analyze the publication dates of the samples and the topics they covered. Below, we can see the years that these 5,000 samples were published along with the top 50 concepts that appeared in their titles."),
+                                          h5("Visuals"),
+                                          br(),
+                                          br(),
+                                          br(),
+                                          p("We see a large increase in published research in our sample in 2020. The vast majority of research was posted in the past three years. Notably, all 5,000 samples were published in 2014 or later. For a bit of context, the Holdren memo, which directed federal programs to make publicly funded research available to the public within a year of publication, was signed in February of 2013."),
+                                 
+                                          p("We, unsurprisingly, see many scientific concepts appear in the titles of our sample."),
+                                          img(src = "icpsr_example1.png", height = 600, width = 1000),
+                                          img(src = "icpsr_example2.png", height = 600, width = 1000),
+                                          
+                                 ),
 
 
-                        tabPanel("Figshare"
-
-
-
+                        tabPanel("Figshare", style = "margin:20px",
+                                 h5("Background"),
+                                 br(),
+                                 br(),
+                                 br(),
+                                 p("Figshare is a multidisciplinary repository with almost 6,000,000 uploaded items, including articles, datasets, reports, book chapters, etc. Figshare tracks major metrics of reuse, like downloads, citations, and views, and also collects information on download size, number of files, license, total edits, and number of keywords. Our sample size was 7,816, which we came to after accessing the 5,000 most cited and 5,000 most downloaded, merging the datasets, and removing the overlap. "),
+                                 br(),
+                                 img(src="icpsr_graph.png", height = 600, width = 1000),
+                                 br(),
+                                 br(),
+                                 br(),
+                                 p("Keywords were of particular interest for this repository, as they serve as a way for a dataset or other piece of research to be findable. This is, theoretically, a crucial first step to being downloaded or cited. While we did not analyze the actual keywords on our sample, we did collect the number of keywords on each dataset. We see below that fewer keywords tend to lead to more downloads, perhaps showing that fewer, more deliberately chosen keywords increases a dataset’s searchability."),
+                                 
+                                 h5("Visuals"),
+                                 br(),
+                                 br(),
+                                 br(),
+                                 p("Licenses were also of interest. The literature argues that potential data donors are sometimes hesitant to share their data for fear that they will lose control over it or that other researchers will use it incorrectly. Licenses could potentially allay some of those fears by giving some control back to the donor. Licenses could, in these ways, affect both the donor and user. Do donors tend to choose more restrictive licenses? Do users download datasets with less restrictive licenses more frequently?"),
+                                 img(src = "icpsr_example1.png", height = 600, width = 1000),
+                                 img(src = "icpsr_example2.png", height = 600, width = 1000),
+                                 
                         ),
                         tabPanel("Dryad", style = "margin:20px",
                                  h5("Background"),
