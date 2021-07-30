@@ -165,6 +165,16 @@ corrplot(cor(data[,2:4]))
 
 
 
+
+
+
+
+
+
+
+
+
+
 # analyzing nsf
 nsf<-read.csv("NSF.csv",header=TRUE)
 nsf<-nsf[,1:14]
@@ -177,11 +187,35 @@ head(nsf)
 colnames(nsf)
 nsf$TITLE<-gsub('[[:digit:]]+', '', nsf$TITLE)
 nsf_title_words <- nsf %>% unnest_tokens(word,TITLE) %>% anti_join(stop_words) %>% count(word,sort=T)
-head(nsf_title_words,25)
+nsf_title_words<-nsf_title_words[-1,]
+set.seed("123")
 wordcloud(words=nsf_title_words$word,freq=nsf_title_words$n,min.freq = 1,
-          max.words=200,random.order=FALSE,rot.per=0.35,colors=brewer.pal(8,"Dark2"))
+          max.words=100,random.order=FALSE,rot.per=0.35,colors=brewer.pal(8,"Dark2"))
 nsfyears<-barplot(table(nsf$YEAR),main="Number of Published Items by Year Since 2014",ylab="Published Items",xlab="Year",ylim=c(0,4000))
 text(nsfyears,table(nsf$YEAR)+100,table(nsf$YEAR))
+
+
+nsfyears<-as.data.frame(table(nsf$YEAR))
+
+ggplot(data=nsfyears, aes(x=Var1,y=Freq))+
+  geom_bar(stat="identity",fill="#E57200")+
+  geom_text(aes(label=Freq),color="black",vjust=0,size=4)+
+  ggtitle("Number of Published Items by Year") +
+  xlab("Year") + ylab("Published Items") +
+  #scale_x_discrete(labels=c("Up to 3","4 to 5","6 to 8","9 or more")) +
+  theme(legend.position = "none",
+        plot.title = element_text(hjust=0.5,face="bold",size=15),
+        axis.text.x=element_text(color = "black", size=9, angle=35, vjust=.8, hjust=0.8),
+        axis.title.x = element_text(size=12),
+        axis.title.y = element_text(size=12)
+  )
+
+
+
+
+
+
+
 
 
 

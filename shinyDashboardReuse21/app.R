@@ -114,7 +114,7 @@ research (producer communities); in other words, the ease of use of data collect
                       
                       p("This table here provides an overview of 5 of the 6 repositories our team from UVA chose to analyze."),
                       
-                      ##INSERT VISUALS
+                      img(src = "tablerepos.png", height = 600, width = 1000),
                       
                       p("These were just the repositories UVA analyzed. ISU also analyzed other repositories. Their site, along with a brief overview of their work, can be found in the ISU tab.")
                       
@@ -130,7 +130,7 @@ research (producer communities); in other words, the ease of use of data collect
                                           br(),
                                           p("NSF PAR is a repository with a science focus. It contains around 130,000 total published pieces of research. NSF PAR is in many ways unlike the other repositories we chose to analyze. It does not track downloads, citations, or views. Furthermore, the majority of results it stores are not datasets, but are instead peer reviewed publications. Finally, it does not store its results directly, but instead include its results’ metadata and a link to an external repository where a user can access the entire document. However, the metadata still offered a lot for us to analyze. "),
                                           br(),
-                                          img(src="icpsr_graph.png", height = 600, width = 1000),
+                                          img(src="nsfWords.png", height = 600, width = 1000),
                                           br(),
                                           br(),
                                           br(),
@@ -145,8 +145,8 @@ research (producer communities); in other words, the ease of use of data collect
                                           p("We see a large increase in published research in our sample in 2020. The vast majority of research was posted in the past three years. Notably, all 5,000 samples were published in 2014 or later. For a bit of context, the Holdren memo, which directed federal programs to make publicly funded research available to the public within a year of publication, was signed in February of 2013."),
                                  
                                           p("We, unsurprisingly, see many scientific concepts appear in the titles of our sample."),
-                                          img(src = "icpsr_example1.png", height = 600, width = 1000),
-                                          img(src = "icpsr_example2.png", height = 600, width = 1000),
+                                          img(src = "nsfyears.png", height = 600, width = 1000),
+                                          #img(src = "icpsr_example2.png", height = 600, width = 1000),
                                           
                                  ),
 
