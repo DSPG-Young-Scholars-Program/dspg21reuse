@@ -138,21 +138,21 @@ research (producer communities); in other words, the ease of use of data collect
                                  br(),
                                  br(),
                                  p("Dryad is a community-driven, open-source multidisciplinary repository. Of the 41,000 datasets on the website, 
-                        each contains the number of downloads and views per dataset, as well as the number of publications the dataset was cited in and a link to the data’s original study. 
-                        For reference, there were an average of 41 downloads per dataset, and 107 views per dataset."),
+each contains the number of downloads and views per dataset, as well as the number of publications the dataset was cited in and a link to the data’s original study. 
+For reference, there were an average of 41 downloads per dataset, and 107 views per dataset."),
                                  br(),
                                  p("Notably, dryad also provides data usage, or (re)usage notes: if a researcher wants 
-                        to use data posted to dryad in their own study, he or she can read the usage notes provided with the data to understand what 
-                        packages and software are needed to read the data, or what steps can be taken to best prepare the data for analysis. 
-                        The graph below depicts the number of datasets published to dryad over time from our sample of 3400 datasets,
-                        spanning from 2007 to 2021. We see that over time, there is an increase in data sharing, quantified by the number of datasets published.
-                        "),
+to use data posted to dryad in their own study, he or she can read the usage notes provided with the data to understand what 
+packages and software are needed to read the data, or what steps can be taken to best prepare the data for analysis. 
+The graph below depicts the number of datasets published to dryad over time from our sample of 3400 datasets,
+spanning from 2007 to 2021. We see that over time, there is an increase in data sharing, quantified by the number of datasets published.
+"),
                                  
                                  h5("Visuals"),
                                  br(),
                                  br(),
                                  br(),
-                                 img(src = "dryad_graph.png", height = 600, width = 1000),
+                                 img(src = "dryad_pubs_per_year.png", height = 600, width = 1000),
                                  
                         ),
                         
