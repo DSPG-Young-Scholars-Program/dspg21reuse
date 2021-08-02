@@ -56,29 +56,30 @@ research (producer communities); in other words, the ease of use of data collect
                         
 
 
-                        tabPanel("The Process",
-                                 h3("The Process", align = "center", style = "margin-bottom: 50px"),
-                                 style = "margin-left: 120px;",
-                                 style = "margin-top: 30px;",
-                                 style = "margin-right: 120px;",
+             tabPanel("The Process",style = "margin:45px",
+                      fluidRow(
+                        column(3, tags$img(height = "80%", width = "80%", src = "biilogo.png")),
+                        column(6, h1("The Process")),
+                        column(3, tags$img(height = "80%", width = "80%", src = "partnerlogos.png", align = "right"))
+                      ),
 
                                    fluidRow(style = "margin-top:100px",
-                                     column(3, h4("Repository Profiling and Selections")),
+                                     column(3, h5("Repository Profiling and Selections")),
                                      column(6, wellPanel(p(style = "font-size:15px","The first step in our process this summer was to identify the data we wanted to collect and the repositories from which to collect the data. This goal was achieved in two main steps. First, we, along with the ISU team, profiled a total of 205 publicly accessible data repositories. When doing this, we recorded characteristics of the repositories, metrics they tracked, their accessibility, their usability for our research purposes, their size, and more. Characteristics include things like which fields the repositories focused on or whether they had integrated tools for facilitating reuse. Metrics they tracked included more obvious metrics like downloads and more unique metrics like altmetrics, which track a piece of research's presence on online platforms. A main consideration when evaluating accessibility was whether the repository required registration or an account for a user to reuse the datasets. To evaluate the repositories' usability for our purposes, we made a note of the APIs they offered and how they could help our research. Finally, we prioritized larger repositories, as measured by the number of datasets or other projects, such as articles or book chapters, they contained. After considering all of these factors, we chose and ultimately analyzed 5 repositories: NSF PAR, Figshare, Dryad, KNB, and ICPSR.")))
                                    ),
                                    hr(),
                                    fluidRow(style = "margin-top:100px",
-                                            column(3, h4("Literature Review")),
+                                            column(3, h5("Literature Review")),
                                             column(6, wellPanel(p(style = "font-size:15px","The second step for identifying the information we wanted to collect was to compare our repository profiling results to recommendations in the literature. We based our literature review on three main, recent articles: Fecher et. al. (2015), Koesten et. al. (2020), and Thanos (2015). We compiled a list of specific recommendations and common themes. This process highlighted the roles technology, policy, and culture can play in fostering data reuse. While the focus of our research this summer was on the technology side, this information guided the direction of our researh and supplemented our analyses and interpretations of our findings.  ")))
                                    ),
                                    hr(),
                                    fluidRow(style = "margin-top:100px",
-                                            column(3, h4("Web Scraping")),
+                                            column(3, h5("Web Scraping")),
                                             column(6, wellPanel(p(style = "font-size:15px","Before we could do any quantitative analyses, we needed data. We used the R packages rvest and RSelenium, along with the sites' APIs, to collect our samples. The functions contained within rvest ultimately allowed us to extract most of the information we needed from our sites. However, in most cases we needed to use RSelenium in order to allow the websites to fully load before scraping them. This is because the sites initially loaded empty shells, so scraping immediately with rvest returned null results. These two R packages, rvest and RSelenium, allowed us to scrape one site at a time, so we built our code into for loops to scrape thousands of data sets. To get our desired datasets and websites, we used the repositories' APIs.   ")))
                                    ),
                                    hr(),
                                    fluidRow(style = "margin-top:100px",
-                                            column(3, h4("Analyses")),
+                                            column(3, h5("Analyses")),
                                             column(6, wellPanel(p(style = "font-size:15px","Since each repository tracked some unique information, analyses by repository varied to some extent. More detailed information can be found in the Results section. However, for almost all repositories, downloads, citations, are views were tracked. We started our analyses by compiling descriptive statistics on these three important metrics of reuse. We also calculated correlations for these three metrics for each repository. After that point, analyses diverged. We used the other information that the repositories tracked, such as metadata analysis reports, file sizes, and numbers of keywords, to build models to predict downloads, citations, and views. We also did more qualitative analyses on the repositories as a whole. Finally, when possible, we graphed the dates of datasets being uploaded to see how the culture of data sharing has changed over time. These are just a few of the total analyses we performed.   "))))
 
 
@@ -120,6 +121,8 @@ research (producer communities); in other words, the ease of use of data collect
                       
                       
              ),
+             
+                          
              
              
              navbarMenu("Results",
@@ -259,13 +262,26 @@ spanning from 2007 to 2021. We see that over time, there is an increase in data 
                         )
                         
 
-                        )#end results tab
+                        ),#end results tab
 
 
+             tabPanel("ISU Results",style = "margin:45px",
+                      fluidRow(
+                        column(3, tags$img(height = "80%", width = "80%", src = "biilogo.png")),
+                        column(6, h1("ISU Results")),
+                        column(3, tags$img(height = "80%", width = "80%", src = "partnerlogos.png", align = "right"))
+                      ),
+                      
+                      
+                      
+             )
 
 
-
-      ) #end navbarPage
+      )
+  
+  #end navbarPage
+  
+  
   )#end fluid page
 
 
