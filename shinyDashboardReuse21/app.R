@@ -15,7 +15,7 @@ ui <- fluidPage(
                       fluidRow(
                         column(3, tags$img(height = "80%", width = "80%", src = "biilogo.png")),
                         column(6, h1("Data Reusability")),
-                        column(3, tags$img(height = "80%", width = "80%", src = "partnerlogos.png", align = "right"))
+                        column(3, tags$img(height = "80%", width = "80%", src = "Inkedpartnerlogo.jpg", align = "right"))
                       ),
 
                       h5("SDAD/DSPG"),
@@ -25,22 +25,25 @@ ui <- fluidPage(
                       p("The Data Science for the Public Good (DSPG) Young Scholars program is a summer immersive program held at SDAD. Entering its eighth year, the program engages students from across the country to work together on projects that address state, federal, and local government challenges around critical social issues relevant in the world today. DSPG young scholars conduct research at the intersection of statistics, computation, and the social sciences to determine how information generated within every community can be leveraged to improve quality of life and inform public policy. ", style = "color:#232D4B"),
                       
                       h5("Data Reusability"),
-                      p("Data reusability refers to the ease of using data for legitimate scientific research by one or
-more communities of research (consumer communities) that is produced by other communities of
-research (producer communities); in other words, the ease of use of data collected for one purpose to study a new problem. As data reusability becomes a distinct characteristic of modern scientific practice comes the mandate for public access to research data, and a push towards transparent research practices that transform the way we conduct research across scholarly fields.  However, disciplines vary widely in their readiness to adopt these new practices, and research institutions face the daunting prospect of determining how to encourage better research practices for researchers from any discipline. While best practices in sharing data are now centered on the FAIR principles (findable, accessible, interoperable, reusable), limited attention has been paid to what actually makes a data source reusable by another researcher. 
-"),
+                      p("Data reusability refers to the ease with which data collected by some research communities (known as producer communities) for one purpose can be used by other research communities (known as consumer communities) to study a new problem. As data reusability becomes a distinct characteristic of modern scientific practice, organizations begin to mandate public accessibility to research data and push towards transparent research practices.  However, disciplines vary widely in their readiness to adopt these new practices, and research institutions face the daunting prospect of determining how to encourage better research practices for researchers from all disciplines. While best practices in sharing data are now centered on the FAIR principles (findable, accessible, interoperable, reusable), limited attention has been paid to what actually makes a data source reusable by another researcher. We spent our summer studying this question."),
 
                       p("In this project, we:"),
                       p("1. Develop and pilot test a framework that articulates the concept of the “reusability” of a data source from the perspective of a user and is extensible across scholarly disciplines;"),
                       p("2. Identify practices for planning and conducting a research study that will increase the reusability of the data shared from the investigation, as well as reduce the burden in creating and appropriately using the data source; and"),
                       p("3. Propose a path forward for accelerating community readiness and the success of researchers in effectively producing a publicly accessible data product that readily enables a new user to evaluate and appropriately analyze the data source."),
-                      p("By better understanding of the reusability of a shared research data source, researchers from a range of disciplines, especially those without a data sharing tradition, will be able to improve their planning and execution in producing research data intended for public access, thereby increasing the rigor of research studies and shared data products.By providing a pathway forward for increasing our capacity to produce more reusable data sources, this work provides information desperately needed by research institutions and other organizations to accelerate community readiness for developing and appropriately sharing high quality reusable research data sources."),
+                      p("By better understanding the reusability of a shared research data source, researchers from a range of disciplines, especially those without a data sharing tradition, will be able to improve their planning and execution in producing research data intended for public access, thereby increasing the rigor of research studies and shared data products. By providing a pathway forward for increasing our capacity to produce more reusable data sources, this work provides information desperately needed by research institutions and other organizations to accelerate community readiness for developing and appropriately sharing high quality reusable research data sources."),
 
                       h5("Our Team"),
+                      
                       p("SDAD: Alyssa Mikytuck, Gizem Korkmaz"),
                       p("DSPG: Emily Kurtz (Fellow), Akilesh Ramakrishna (Intern), Aditi Mahabal (Intern)"),
-                      p("Sponsor: Gary Anderson, National Science Foundation (NSF)")
+                      p("Sponsor: Martin Halbert, National Science Foundation (NSF)"),
 
+                      h5("ISU Team"),
+                      p("Collaborator: Sarah Nusser"),
+                      p("Faculty: Adisak Sukul"),
+                      p("DSPG: Tiancheng Zhou (Fellow), Sonyta Ung (Intern), Jack Studier (Intern), Saul Varshavsky (Intern)")
+                      
 
                       ),
 
@@ -60,7 +63,7 @@ research (producer communities); in other words, the ease of use of data collect
                       fluidRow(
                         column(3, tags$img(height = "80%", width = "80%", src = "biilogo.png")),
                         column(6, h1("The Process")),
-                        column(3, tags$img(height = "80%", width = "80%", src = "partnerlogos.png", align = "right"))
+                        column(3, tags$img(height = "80%", width = "80%", src = "Inkedpartnerlogo.jpg", align = "right"))
                       ),
 
                                    fluidRow(style = "margin-top:100px",
@@ -80,7 +83,7 @@ research (producer communities); in other words, the ease of use of data collect
                                    hr(),
                                    fluidRow(style = "margin-top:100px",
                                             column(3, h5("Analyses")),
-                                            column(6, wellPanel(p(style = "font-size:15px","Since each repository tracked some unique information, analyses by repository varied to some extent. More detailed information can be found in the Results section. However, for almost all repositories, downloads, citations, are views were tracked. We started our analyses by compiling descriptive statistics on these three important metrics of reuse. We also calculated correlations for these three metrics for each repository. After that point, analyses diverged. We used the other information that the repositories tracked, such as metadata analysis reports, file sizes, and numbers of keywords, to build models to predict downloads, citations, and views. We also did more qualitative analyses on the repositories as a whole. Finally, when possible, we graphed the dates of datasets being uploaded to see how the culture of data sharing has changed over time. These are just a few of the total analyses we performed.   "))))
+                                            column(6, wellPanel(p(style = "font-size:15px","Since each repository tracked some unique information, analyses by repository varied to some extent. More detailed information can be found in the Results section. However, for almost all repositories, downloads, citations, and views were tracked. We started our analyses by compiling descriptive statistics on these three important metrics of reuse. We also calculated correlations for these three metrics for each repository. After that point, analyses diverged. We used the other information that the repositories tracked, such as metadata analysis reports, file sizes, and numbers of keywords, to build models to predict downloads, citations, and views. We also did more qualitative analyses on the repositories as a whole. Finally, when possible, we graphed the dates of datasets being uploaded to see how the culture of data sharing has changed over time. These are just a few of the total analyses we performed.   "))))
 
 
 
@@ -93,15 +96,15 @@ research (producer communities); in other words, the ease of use of data collect
                       fluidRow(
                         column(3, tags$img(height = "80%", width = "80%", src = "biilogo.png")),
                         column(6, h1("Profiling and Choosing Repositories")),
-                        column(3, tags$img(height = "80%", width = "80%", src = "partnerlogos.png", align = "right"))
+                        column(3, tags$img(height = "80%", width = "80%", src = "Inkedpartnerlogo.jpg", align = "right"))
                       ),
                       
                       p("One of our project’s preliminary steps in the Data Discovery process was finding repositories in which Publicly Accessible Research Data (PARD) is available. To this end, we were able to utilize the Open Access Directory, a collection of lists about open access (OA) to science and scholarship, maintained by the OA community at large. This list holds 204 repositories spanning a wide range of subject fields and can be accessed ",
-                        tags$a(href="http://oad.simmons.edu/oadwiki/Data_repositories.", "here."), style = "color:#232D4B"),
+                        tags$a(href="http://oad.simmons.edu/oadwiki/Data_repositories.", "here."),  style = "color:#232D4B"),
+                      p("We also analyzed NSF PAR to get our total to 205 repositories profiled."),
+                      p("Prior to the step of Data Screening and profiling this list of 205 repositories, our team conducted a literature review of articles on the subject of data reusability to understand the recent progress made towards open science and the challenges that exist in the domain. Our literature review suggested, among other valuable lessons, that solutions to address these goals can be pursued not only at the data level, but at the repository level with basic metrics for reuse and more sophisticated technological features. ", style = "color:#232D4B"),
                       
-                      p("Prior to the step of Data Screening and profiling this list of 204 repositories, our team conducted a literature review of articles on the subject of data reusability to understand the recent progress made towards open science and the challenges that exist in the domain. Our literature review suggested, among other valuable lessons, that solutions to address these goals can be pursued not only at the data level, but at the repository level with basic metrics for reuse and more sophisticated technological features. ", style = "color:#232D4B"),
-                      
-                      p("With this knowledge of the relevant literature, and working in conjunction with the Iowa State University team, we profiled these 204 repos on the basis of our evaluation framework, namely:"),
+                      p("With this knowledge of the relevant literature, and working in conjunction with the Iowa State University team, we profiled these 205 repositories on the basis of our evaluation framework, namely:"),
                       
                       p("1. Does the repository report the number of downloads, citations, views, or other metrics for datasets?"),
                       
@@ -111,9 +114,9 @@ research (producer communities); in other words, the ease of use of data collect
                       
                       p("4. Does the repository have other interesting features that can be analyzed for their impact and/or association with data reuse?"),
                       
-                      p("After completing this profiling process, our team selected 6 repositories to study, with each team member picking two of their own repositories to scrape. These 6 repositories were chosen, as previously mentioned, for their tracking of metrics of reuse, their size, their ease of access, and additionally, interesting features they displayed that could be used in our analysis of reuse. For example, the Multidisciplinary Repository Dryad contained a useful tool relating to the scope of our project, “Data (re)Usage Instructions.” This tool… Another example of such a feature was the “Metadata Assessment Report” from the Ecology and Biology repository the Knowledge Network for Biocomplexity (KNB). This site ran its own analysis on metadata associated with each research study, performing metadata “checks” on aspects of the metadata such as  if a methodology section is present, and if a unique identifier exists for the study."),
+                      p("After completing this profiling process, our team selected 6 repositories to study, with each team member picking two of their own repositories to scrape. These 6 repositories were chosen, as previously mentioned, for their tracking of metrics of reuse, their size, their ease of access, and additionally, interesting features they displayed that could be used in our analysis of reuse. For example, the Multidisciplinary Repository Dryad contained a useful tool relating to the scope of our project, “Data (re)Usage Instructions.” Unfortunately, due to its difficulty in being scraped, we were ultimately unable to collect data from Dryad. Another example of such a feature was the “Metadata Assessment Report” from the Ecology and Biology repository the Knowledge Network for Biocomplexity (KNB). This site ran its own analysis on metadata associated with each research study, performing metadata “checks” on aspects of the metadata such as  if a methodology section is present, and if a unique identifier exists for the study."),
                       
-                      p("This table here provides an overview of 5 of the 6 repositories our team from UVA chose to analyze."),
+                      p("This table below provides an overview of 5 of the 6 repositories (all of our original choices but Dryad) our team from UVA chose to analyze."),
                       
                       img(src = "tablerepos.png", height = 600, width = 1000),
                       
@@ -269,11 +272,21 @@ spanning from 2007 to 2021. We see that over time, there is an increase in data 
                       fluidRow(
                         column(3, tags$img(height = "80%", width = "80%", src = "biilogo.png")),
                         column(6, h1("ISU Results")),
-                        column(3, tags$img(height = "80%", width = "80%", src = "partnerlogos.png", align = "right"))
+                        column(3, tags$img(height = "80%", width = "80%", src = "Inkedpartnerlogo.jpg", align = "right"))
                       ),
-                      
-                      
-                      
+                      p("Throughout the summer, we collaborated with the DSPG team at Iowa State University. Our two teams followed many of the same processes, but there were some differences. To learn more about their summer, visit their site", tags$a(href="https://faculty.sites.iastate.edu/adisak/datareuse", "here."), style = "color:#232D4B"),
+                      p("We would like to highlight the results of one of their repositories here, though. Specifically, we will share what they found when analyzing the Kaggle repository, in their own words:"),
+                      br(),
+                      br(),
+                      br(),
+                      p("Kaggle is an online community of data scientists and practitioners of machine learning.  Kaggle allows users to publish and explore data sets and their reusability metrics, such as size, view count, vote count, update date, download count, and their proprietary usability score.  I explored the datasets by collecting 6,900 records through the API and using web scraping tools to retrieve metadata. "),
+                      img(src = "kaggle1.png", height = 600, width = 1000),
+                      p("Through our research, we had some interesting findings.  Many of these revolved around Kaggle’s usability rating.  According to Kaggle’s website, “It’s a single number we calculate for each dataset that rates how easy-to-use a dataset is based on a number of factors, including level of documentation, availability of related public content like kernels as references, file types and coverage of key metadata” (Goldbloom and Hamner, 2010).  This metric gave us some interesting findings, as seen in graphs like the figure above.  There is a strong correlation between the usability score and the download count in a given dataset, which could indicate that users seek out data with a higher usability rating. "),
+                      img(src = "kaggle2.png", height = 600, width = 1000),
+                      p("We also found that the median usability rating of a dataset has increased overtime for the last four years.  The Usability Rating was introduced in May of 2019. The datasets created prior have been retrofitted with the Usability Rating calculation. Since then, the median usability rating of datasets has gradually climbed. This could indicate that the existence of such a metric has encouraged data producers to reach a higher Usability Rating by completing the metadata requirements and propel a culture of reusability on Kaggle."),
+                      br(),
+                      br(),
+                      p("ISU studied four other repositories, for a total of 5. The other repositories are NeuroMorpho, Astrophysics Data System, Global Biodiversity Information Facility, and MorphoBank. Please visit their site to learn more about their findings!")
              )
 
 
