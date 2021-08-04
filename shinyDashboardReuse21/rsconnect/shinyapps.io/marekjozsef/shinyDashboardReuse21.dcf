@@ -5,9 +5,9 @@ account: marekjozsef
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 4432976
-bundleId: 4885398
+bundleId: 4887460
 url: https://marekjozsef.shinyapps.io/shinyDashboardReuse21/
-when: 1628030568.79394
-lastSyncTime: 1628030568.79394
+when: 1628086407.29427
+lastSyncTime: 1628086407.29427
 asMultiple: FALSE
 asStatic: FALSE
