@@ -237,7 +237,7 @@ spanning from 2007 to 2021. We see that over time, there is an increase in data 
                         In understanding the importance of providing quality metadata in order to make data reusable, we would expect to see that failed checks were negatively associated with downloads, and this is, in fact, what we observed after performing a simple regression of using the number of failures to predict downloads. We got a coefficient of -7.5 that is highly significant at less than a .01 percent level."), 
                         
                                  br(),
-                                 img(src="knb_graph.png", height = 600, width = 1000),
+                                 img(src="md_fail.png", height = 600, width = 1000),
                                  br(),
                                  em(p("The graph above displays the total failure count, divided by the type of failure, and we can see the most common failures being the absence of a license, a publishing date not present, and the abstract length not being sufficiently long.",style = "font-size:120%")),
                                  
