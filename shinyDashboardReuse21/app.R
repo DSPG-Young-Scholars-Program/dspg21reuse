@@ -234,20 +234,21 @@ spanning from 2007 to 2021. We see that over time, there is an increase in data 
                                  br(),
                                  br(),
                                  p("To perform this analysis, we scraped a random 5,000 set of studies from the site, and collected Downloads, Views, and Citations, along with information on these metadata checks. In summary, this random sample average about 16 downloads per each dataset and each dataset had about 3 failures.
-                        In understanding the importance of providing quality metadata in order to make data reusable, we would expect to see that failed checks were negatively associated with downloads, and this is, in fact, what we observed after performing a simple regression of using the number of failures to predict downloads. We got a coefficient of -7.5 that is highly significant at less than a .01 percent level."), 
+                        In understanding the importance of providing quality metadata in order to make data reusable, we would expect to see that failed checks were negatively associated with downloads, and this is, in fact, what we observed after performing a simple regression of using the number of failures to predict downloads. We got a coefficient of -7.5 that is highly significant at less than a .01 percent level. Below is a scatterplot showing the relationship between Failed Metadata Checks and Downloads:"), 
                         
                                  br(),
                                  img(src="md_fail.png", height = 600, width = 1000),
                                  br(),
-                                 em(p("The graph above displays the total failure count, divided by the type of failure, and we can see the most common failures being the absence of a license, a publishing date not present, and the abstract length not being sufficiently long.",style = "font-size:120%")),
+                                 
                                  
                                  br(),
                                  p("This metadata assessment report feature holds much value for the topic of data reuse. It is of worth for both data publishers and data re-users,  as publishers are able to upload their research to KNB, and then observe, from the assessment report, which areas of their metadata is lacking. Conversely, data re-users can screen data before attempting to use them by first determining if sufficient information about the data is present. 
                         As a whole, this analysis on a sample set of studies shows the potential of such a tool for repositories with publicly accessible research data.  These methods can be replicated across repositories that have similar assessment tools, and provide insight into uncovering the specific and most glaring gaps in the reusability framework, and which policies and standards can be prioritized moving forward. "),
                                  br(),
                                  br(),
-                                 br()
-                                 
+                                 br(),
+                                 img(src="knb_graph.png", height = 600, width = 1000),
+                                 em(p("The graph above displays the total failure count, divided by the type of failure, and we can see the most common failures being the absence of a license, a publishing date not present, and the abstract length not being sufficiently long.",style = "font-size:120%"))
                                  
                         ),
                         
