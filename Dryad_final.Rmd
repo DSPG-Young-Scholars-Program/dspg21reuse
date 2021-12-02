@@ -1,0 +1,139 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+# Importing the necessary libraries
+library(rvest)
+library(ggplot2)
+library(rvest)    
+library(RSelenium)
+library(tidyverse)
+library(RSelenium)
+library(httr)
+library(Rcpp)
+library(RSelenium)
+library(dplyr)
+library(purrr)
+library(xml2)
+library(data.table)
+
+
+```
+
+```{r}
+#Setting up the dataframe with one article
+remDr <- remoteDriver$new(
+
+  remoteServerAddr = "104.248.112.16",
+
+  port = 4444,
+
+  browserName = "firefox"
+
+)
+
+
+remDr$open()
+remDr$setTimeout(type = "page load", milliseconds = 20000)
+remDr$getStatus()
+
+remDr$navigate("https://datadryad.org/stash/dataset/doi:10.25338/B82G9B")
+Sys.sleep(10) # give the page time to fully load
+remDr$getCurrentUrl()
+html <- remDr$getPageSource()[[1]]
+print(remDr$getPageSource)
+page<-read_html(html)
+
+#Extracting downloads, views, and citations
+d1_metrics<-(html_text(html_nodes(page,"div.o-metrics__metric")))
+d1_doi<-(html_text(html_nodes(page,"div.o-metadata__group2-item")))
+
+#Creating a dataframe with the metrics
+df<-data.frame(t(d1_metrics))
+df
+
+df2<-data.frame(t(d1_doi))
+df2
+
+df<-cbind(df,df2)
+df
+
+```
+
+
+```{r}
+remDr <- remoteDriver$new(
+
+  remoteServerAddr = "104.248.112.16",
+
+  port = 4446,
+
+  browserName = "firefox"
+
+)
+# Creating the final dataframe
+
+remDr$open()
+remDr$setTimeout(type = "page load", milliseconds = 20000)
+remDr$getStatus()
+
+article_list2 <- list("start")
+url_list2 <- list("start")
+page_urls2<-list("https://datadryad.org/search?page=4&per_page=100&q=", "https://datadryad.org/search?page=5&per_page=100&q=","https://datadryad.org/search?page=6&per_page=100&q=",
+                "https://datadryad.org/search?page=7&per_page=100&q=",
+                "https://datadryad.org/search?page=8&per_page=100&q=", "https://datadryad.org/search?page=9&per_page=100&q=", "https://datadryad.org/search?page=10&per_page=100&q=", "https://datadryad.org/search?page=11&per_page=100&q=", "https://datadryad.org/search?page=12&per_page=100&q=", "https://datadryad.org/search?page=13&per_page=100&q=", "https://datadryad.org/search?page=14&per_page=100&q=", "https://datadryad.org/search?page=15&per_page=100&q=", "https://datadryad.org/search?page=16&per_page=100&q=", "https://datadryad.org/search?page=17&per_page=100&q=", "https://datadryad.org/search?page=18&per_page=100&q=", "https://datadryad.org/search?page=19&per_page=100&q=", "https://datadryad.org/search?page=20&per_page=100&q=", "https://datadryad.org/search?page=21&per_page=100&q=", "https://datadryad.org/search?page=22&per_page=100&q=", "https://datadryad.org/search?page=23&per_page=100&q=", "https://datadryad.org/search?page=24&per_page=100&q=", "https://datadryad.org/search?page=25&per_page=100&q=", "https://datadryad.org/search?page=26&per_page=100&q=", "https://datadryad.org/search?page=27&per_page=100&q=", "https://datadryad.org/search?page=28&per_page=100&q=", "https://datadryad.org/search?page=29&per_page=100&q=", "https://datadryad.org/search?page=30&per_page=100&q=", "https://datadryad.org/search?page=31&per_page=100&q=", "https://datadryad.org/search?page=32&per_page=100&q=", "https://datadryad.org/search?page=33&per_page=100&q=", "https://datadryad.org/search?page=34&per_page=100&q=", "https://datadryad.org/search?page=35&per_page=100&q=", "https://datadryad.org/search?page=36&per_page=100&q=", "https://datadryad.org/search?page=37&per_page=100&q=", "https://datadryad.org/search?page=38&per_page=100&q=", "https://datadryad.org/search?page=39&per_page=100&q=", "https://datadryad.org/search?page=40&per_page=100&q=")
+
+for (url in page_urls2){
+  remDr$navigate(url)
+  Sys.sleep(10) # give the page time to fully load
+  html <- remDr$getPageSource()[[1]]
+  page<-read_html(html)
+
+  #Extracting urls
+  articles2<-(html_nodes(page,"a"))
+  article_list2<-append(article_list2,articles2)
+
+  urls2<-html_attr(articles2, "href")
+  url_list2<-append(url_list2,urls2)
+}
+
+for (url in url_list2){
+  if (grepl("stash", url, fixed = TRUE) == TRUE){
+    site=paste("https://datadryad.org", url, sep="")
+
+    remDr$navigate(site)
+    
+    Sys.sleep(10) # give the page time to fully load
+    print(length(remDr$getPageSource()))
+    html <- remDr$getPageSource()[[1]]
+    page<-read_html(html)
+
+    #Extracting downloads, views, and citations
+    metrics<-(html_text(html_nodes(page,"div.o-metrics__metric")))
+    doi_stuff<-(html_text(html_nodes(page,"div.o-metadata__group2-item")))
+    
+    #Creating a dataframe with the metrics
+    df1_temp<-data.frame(t(metrics))
+    df2_temp<-data.frame(t(doi_stuff))
+
+    df_temp<-cbind(df1_temp,df2_temp)
+
+    if (ncol(df_temp)==ncol(df)){
+      df<-rbind(df, df_temp)
+      print("done")
+    }else{
+      print("not same columns")
+    }
+      
+  }else{
+    print("didn't work")
+  }
+}
+
+View(df)
+write.csv(df,"dryad_stats_3000.csv")
+
+```
+
