@@ -1,0 +1,173 @@
+---
+title: "ICPSR_Scraping"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(RSelenium)
+library(rvest)
+library(XML)
+library(methods)
+library(jsonlite)
+library(xml2)
+library(curl)
+library(tidyverse)
+library(stringr)
+library(data.table)
+```
+
+
+```{r cars}
+# remote_port can be set to 4444, 4445, 4446, or 4447
+# if two people are using same port, one will just be queued behind the other
+remote_port <- 4447
+
+# remote drive settings
+remDr <- remoteDriver$new(
+  remoteServerAddr = "104.248.112.16",
+  port = remote_port,
+  browserName = "firefox"
+)
+
+# open connection
+remDr$open()
+# set longer timeout for pageload - helps with a lot of errors
+remDr$setTimeout(type = "page load", milliseconds = 10000)
+
+# navigate to page
+remDr$navigate("https://www.google.com")
+
+# you can observe what is happening at ports 7900, 7901, 7902, 7903
+# e.g. go to http://104.248.112.16:7901 to see what is happening if you are connection via port 4447
+```
+
+```{r}
+rD <- rsDriver(browser="firefox", port=4500L, verbose=F)
+remDr <- rD[["client"]]
+```
+
+You can also embed plots, for example:
+
+```{r}
+ICPSR_urls <- read.csv("ICPSR_urls.csv")
+ICPSR_urls <- ICPSR_urls[,2]
+ICPSR_urls
+```
+
+
+
+```{r}
+get_article_stats <- function(article_url){
+ 
+  remDr$navigate(article_url)
+  for (j in 1:10){
+    Sys.sleep(1)
+    html <- remDr$getPageSource()[[1]]
+    page<-read_html(html)
+    
+    #downloads & related publications
+    usage_metrics <-html_nodes(page,"div#studyMetrics")
+    
+    if(length(usage_metrics)==0){next}
+    
+    #downloads & related publications
+    usage_metrics <-html_nodes(page,"div#studyMetrics")
+    usage_metrics <- html_text(usage_metrics)
+    downloads <- sub("Downloads.*", "", usage_metrics)
+    downloads <- sub(",","",downloads)
+    downloads <- as.numeric(downloads)
+    downloads
+    publications <- sub(".*past three years", "", usage_metrics)
+    publications <- sub("Data.*","",publications)
+    publications <- sub(",","",publications)
+    publications <- as.numeric(publications)
+    publications
+    
+    
+    #Unique DOI
+    doi <-html_nodes(page,"p.doi")
+    doi <- html_text(doi)
+    doi
+    
+    #Principal Investigator(s)
+    pi <-html_nodes(page,"p.p-i")
+    pi <- html_text(pi)
+    p_key <- ".*View help for Principal Investigator"
+    pi <- sub(p_key,"",pi)
+    pi <- str_replace_all(pi, "[()]","")
+    pi <- str_replace_all(pi, "[\t\n]","")
+    pi <- sub('.', '', pi)
+    pi
+    
+    
+    #Version- may need to filter data table at end, not labeled in the html
+    version <- html_nodes(page,"p")
+    version <- html_text(version)
+    version <- version[10]
+    version <- str_replace_all(version,"[\t\n]","")
+    version <- regmatches(version, gregexpr("[[:digit:]]+", version)) 
+    version <- as.numeric(version[[1]][1])
+    version
+    
+    
+    #Funding Agency
+    funder <- html_nodes(page, "div.panel-body")
+    funder <- html_text(funder)
+    funder <- str_replace_all(funder[1], "[\t\n]" , "")
+    f <- ".*View help for Funding"
+    funder <- sub(f, "", funder)
+    s <- "Subject Terms.*"
+    funder <- sub(s, "",funder)
+    funder <- str_replace_all(funder, "  " , "")
+    funder
+    
+    
+    if(length(usage_metrics)!=0){break}
+  }
+  dt <- data.table(url, doi, downloads, publications, pi, version, funder)
+  dt
+}
+
+get_article_stats(ICPSR_urls[397])
+```
+
+
+```{r}
+# GET INFO AND STATS FOR ALL ARTICLES
+## Create empty data.table
+final_dt <- data.table(article_url = character(), doi = character(), downloads = numeric (),publications = numeric(), 
+                       pi = character(), version = numeric(), funder = character())
+```
+
+
+```{r}
+## Get info and stats, create data.table, combine with final_dt
+#Wrote csv for 1634 observations (1805 urls gone through) +1805
+for (article_url in ICPSR_urls[2900:3000]){
+  article_stats <- get_article_stats(article_url)
+  info_stats_dt <- 
+    data.table(
+      article_url = article_url, 
+      doi = article_stats$doi[[1]], 
+      downloads = article_stats$downloads[[1]],
+      publications = article_stats$publications[[1]],
+      pi = article_stats$pi[[1]],
+      version = article_stats$version[[1]],
+      funder = article_stats$funder[[1]]
+    )
+  
+  print(info_stats_dt)
+  print(paste("adding url", article_url, "to final"))
+  final_dt <- rbindlist(list(final_dt, info_stats_dt))
+}
+
+view(final_dt)
+write.csv(final_dt,"second_ICPSR_stats.csv")
+```
+
+
+
+
+
+

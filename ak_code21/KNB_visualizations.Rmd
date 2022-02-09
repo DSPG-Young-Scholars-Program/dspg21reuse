@@ -1,0 +1,117 @@
+---
+title: "KNB Visualizations"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(corrplot)
+library(ggplot2)
+```
+
+## R Markdown
+```{r}
+knb_stats <- read.csv("FINAL_KNB_stats.csv")
+knb_stats <- subset(knb_stats, select =-c(X))
+knb_stats
+```
+
+
+```{r cars}
+stats_dt <- subset(knb_stats, select=-c(id,failures))
+summary(stats_dt)
+mean(stats_dt$downloads,na.rm=T)
+mean(stats_dt$fcitations,na.rm=T)
+mean(stats_dt$downloads,na.rm=T)
+mean(stats_dt$fcitations,na.rm=T)
+
+N <- cor(stats_dt$downloads, stats_dt$failed_checks, use= "complete.obs")
+N
+M<-cor(stats_dt, use = "complete.obs")
+M
+head(round(M,2))
+corrplot(M, method="circle")
+
+scatter.smooth(x=stats_dt$failed_checks, y=stats_dt$downloads)
+
+regression <- lm(downloads ~ failed_checks, data=stats_dt)
+regression
+summary(regression)
+```
+
+
+
+EXTRACT MOST COMMON FAILURES!!
+```{r pressure}
+abstract = 0
+license = 0 
+date = 0
+title = 0
+method = 0
+temporal_coverage = 0
+geographic_description = 0
+coordinates = 0
+#A description of this dataset's temporal coverage is not present.discoveryA textual description of the geographic coverage of this dataset is not present.discoveryA set of bounding coordinates describing the geographic coverage of this dataset is not present.discovery
+for (fail in knb_stats$failures){
+  
+  #Add one to count if key word is present in fail
+  
+  if (grepl("abstract",fail, fixed =TRUE))
+    abstract = abstract + 1
+    
+  if (grepl("license",fail, fixed =TRUE))
+    license = license + 1
+  
+  if (grepl("date",fail, fixed =TRUE))
+    date = date + 1
+  
+  if (grepl("title",fail, fixed =TRUE))
+    title = title + 1
+  
+  if (grepl("method",fail, fixed =TRUE))
+    method = method + 1
+  
+  if (grepl("temporal coverage",fail, fixed =TRUE))
+    temporal_coverage = temporal_coverage + 1
+  
+  if (grepl("textual description of the geographic coverage",fail, fixed =TRUE))
+    geographic_description= geographic_description + 1
+  
+  if (grepl("coordinates",fail, fixed =TRUE))
+    coordinates = coordinates + 1
+}
+
+failure_counts <- data.frame( Failure =c('abstract','license','date','title','method','temporal_coverage','geographic_description','coordinates'), Failure_Counts = c(abstract,license,date,title,method,temporal_coverage,geographic_description,coordinates)) 
+failure_counts
+```
+
+```{r}
+f <- ggplot(failure_counts, aes(x=reorder(Failure,-Failure_Counts),y=Failure_Counts))
+f + geom_bar(stat="identity",fill="#E57200") + 
+  geom_text(aes(label=Failure_Counts),color="black",vjust=0,size=4) +
+  ggtitle("Metadata Failures") + 
+  xlab("Type of Failure") + ylab("Count") +
+  scale_x_discrete(labels=c("License","Publishing Date","Abstract","Methodology","Title","Temporal Coverage","Geographic Description","Coordinates")) +
+  theme(legend.position = "none", 
+        plot.title = element_text(hjust=0.5,face="bold",size=15),
+        axis.text.x=element_text(color = "black", size=9, angle=35, vjust=.9, hjust=0.8),
+        axis.title.x = element_text(size=12),
+        axis.title.y = element_text(size=12)
+        )
+
+
+s <- ggplot(stats_dt, aes(x=failed_checks,y=downloads))
+s + geom_point(color="#E57200",shape=18) +
+  geom_smooth(method=lm, se=FALSE) +
+  scale_x_continuous(name ="Number of Metadata Failures",
+                   breaks=seq(0,10,1),
+                   labels = seq(0,10,1),
+                   limits=c(0,10))
+```
+
+```{r}
+stats_dt
+f <- ggplot(stats_dt, aes(x=downloads))
+f + geom_histogram()
+```
+

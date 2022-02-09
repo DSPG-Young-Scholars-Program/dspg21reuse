@@ -1,0 +1,156 @@
+---
+title: "KNB Web Scraping"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(RSelenium)
+library(rvest)
+library(XML)
+library(methods)
+library(jsonlite)
+library(xml2)
+library(curl)
+library(dataone)
+library(tidyverse)
+library(stringr)
+library(data.table)
+
+```
+
+## R Markdown
+```{r cars}
+knb_articles <- read.csv("/Users/akileshramakrishna/UVA /DSPG/all_KNB_articles.csv")
+clean_id <- function(article_id){
+  cleaned_article_id <- str_replace(article_id,"/view/","")
+}
+knb_articles <- data.frame(knb_articles[1], lapply(knb_articles[2], clean_id) )
+knb_articles <- subset(knb_articles, select=-c(X))
+colnames(knb_articles) <- "article_id"
+view(knb_articles)
+```
+Reading in csv file with all KNB article urls and pre-processing data for scraping
+
+
+
+
+```{r pressure}
+#Only run once
+rD <- rsDriver(browser="firefox", port=4571L, verbose=F)
+remDr <- rD[["client"]]
+```
+Opening up a browser with RSelenium
+
+
+
+```{r}
+get_article_stats <- function(articleid) {
+  
+  #Downloads, Views, and Citations
+  url <- paste0("https://knb.ecoinformatics.org/view/", articleid)
+  remDr$navigate(url)
+  for (j in 1:10){
+    Sys.sleep(1) # give the page time to fully load
+    html <- remDr$getPageSource()[[1]]
+    page<-read_html(html)
+    bigthree_metrics <- html_nodes(page,".metric-value.badge")
+    
+    if(length(bigthree_metrics)==0){next}
+    
+    bigthree_metrics <- html_text(bigthree_metrics)
+    downloads <- as.numeric(bigthree_metrics[1])
+    citations <- as.numeric(bigthree_metrics[2])
+    views <- as.numeric(bigthree_metrics[3])
+    
+    if(length(bigthree_metrics)!=0){break}
+  }
+    
+  
+  #Metadata Stats
+  md_url <- paste0("https://knb.ecoinformatics.org/quality/",articleid)
+  remDr$navigate(md_url)
+  for (k in 1:10){
+    Sys.sleep(1) #give the page time to fully load
+    md_html <- remDr$getPageSource()[[1]]
+    md_page<-read_html(md_html)
+    checks <- html_nodes(md_page, "h4")
+    
+    if(length(checks)==0){next}
+    
+    checks <- html_text(checks)
+    regexp <- "[[:digit:]]+"
+    passed_checks <- as.numeric(str_extract(checks[1], regexp))
+    warning_checks <- as.numeric(str_extract(checks[2], regexp))
+    failed_checks <- as.numeric(str_extract(checks[3], regexp))
+    total_checks <- passed_checks + warning_checks + failed_checks
+    
+    #Fail Descriptions
+    fail_node <- html_nodes(md_page,"li.list-group-item.check.fail.in.collapse.row-fluid")
+    fail <- html_text(fail_node)
+    fail <- str_replace_all(fail, "[\t\n]" , "")
+    fail <- str_replace_all(fail, "FAILUREREQUIRED","")
+    fail <- str_replace_all(fail, "  ","")
+    failures <- paste(fail, collapse='')
+    
+    if(length(fail_node)!=0){break}
+  }
+  
+  #All Stats
+  dt <- data.table(articleid, downloads, citations, views, total_checks, passed_checks, warning_checks, failed_checks,failures)
+  dt
+}
+
+get_article_stats("doi%3A10.5063%2FF1JQ0ZC5")
+
+```
+Function that retrieves the stats of interest given an article id
+
+
+```{r}
+
+# GET INFO AND STATS FOR ALL ARTICLES
+## Create empty data.table
+final_dt <- data.table(id = character(), downloads = numeric (),citations = numeric(), 
+                       views = numeric(), total_checks = numeric(), passed_checks = numeric(), 
+                       warning_checks = numeric(), failed_checks = numeric(),failures = character())
+
+set.seed(65432)
+index<-sample(1:12994,5000,replace=FALSE)
+
+
+## Get info and stats, create data.table, combine with final_dt
+for (i in index){
+  article_id <- knb_articles[i,1]
+  article_stats <- get_article_stats(article_id)
+  info_stats_dt <- 
+    data.table(
+      id = article_id, 
+      downloads = article_stats$downloads[[1]], 
+      citations = article_stats$citations[[1]],
+      views = article_stats$views[[1]],
+      total_checks = article_stats$total_checks[[1]],
+      passed_checks = article_stats$passed_checks[[1]],
+      warning_checks = article_stats$warning_checks[[1]],
+      failed_checks = article_stats$failed_checks[[1]],
+      failures = article_stats$failures[[1]]
+    )
+  
+  print(info_stats_dt)
+  print(paste("adding id", article_id, "to final"))
+  final_dt <- rbindlist(list(final_dt, info_stats_dt))
+}
+
+view(final_dt)
+write.csv(final_dt,"KNB_stats.csv")
+```
+Adding each article and its stats to a master data table 
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,127 @@
+---
+title: "ICPSR Visualizations"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+library(dplyr)
+```
+
+## R Markdown
+
+```{r cars}
+first <- read.csv("first_ICPSR_stats.csv")
+second <- read.csv("second_ICPSR_stats.csv")
+icpsr_stats <- rbind(first,second)
+icpsr_stats[1,4] <- 1245558
+icpsr_stats <- subset(icpsr_stats, select=-c(X))
+View(icpsr_stats)
+```
+Pre-processing the ICPSR data
+
+
+```{r}
+nsf = list() 
+hhs = list()
+doj = list()
+census = list()
+
+
+#National Science Foundation, United States Department of Health and Human Services, United States Department of Justice. Office of Justice Programs. Bureau of Justice Statistics, Bureau of the Census, United States.
+
+for (i in 1:2776){
+  
+  #Add one to count if key word is present in fail
+  
+  if (grepl("National Science Foundation",icpsr_stats$funder[i], fixed =TRUE))
+    nsf = append(nsf,icpsr_stats$publications[i])
+    
+  if (grepl("Department of Health and Human Services",icpsr_stats$funder[i], fixed =TRUE))
+    hhs = append(hhs,icpsr_stats$publications[i])
+  
+  if (grepl("United States Department of Justice",icpsr_stats$funder[i], fixed =TRUE))
+    doj = append(doj, icpsr_stats$publications[i])
+  
+  if (grepl("Bureau of the Census",icpsr_stats$funder[i], fixed =TRUE))
+    census = append(census, icpsr_stats$publications[i])
+}
+
+nsf = unlist(nsf)
+hhs = unlist(hhs)
+doj = unlist(doj)
+census = unlist(census)
+```
+
+```{r}
+c_nsf <- length(nsf)
+c_hhs <- length(hhs)
+c_doj <- length(doj)
+c_census <- length(census)
+
+counts <- c(c_nsf,c_hhs,c_doj,c_census)
+counts
+
+m_nsf <- mean(nsf,na.rm=T)
+m_hhs <- mean(hhs,na.rm=T)
+m_doj <- mean(doj,na.rm=T)
+m_census <- mean(census,na.rm=T)
+
+means <- c(m_nsf,m_hhs,m_doj,m_census)
+means <- round((means))
+means
+
+s_nsf <- sum(nsf,na.rm=T)
+s_hhs <- sum(hhs,na.rm=T)
+s_doj <- sum(doj,na.rm=T)
+s_census <- sum(census,na.rm=T)
+
+sums <- c(s_nsf,s_hhs,s_doj,s_census)
+sums
+
+
+agencies_dt <- data.frame(Funding_Agency = c("National Science Foundation","Department of Health and Human Services","Department of Justice","Bureau of the Census"),
+                          Number_of_Datasets = counts,
+                          Average_Publications_per_Dataset = means,
+                          Total_Publications = sums)
+agencies_dt
+
+```
+```{r}
+stats_dt <- subset(icpsr_stats, select=c(downloads,publications,version))
+summary(stats_dt)
+stats_dt <- stats_dt %>% filter(version<200)
+mean(stats_dt$downloads,na.rm=T)
+mean(stats_dt$publications,na.rm=T)
+
+N <- cor(stats_dt$publications, stats_dt$version, use= "complete.obs")
+N
+M<-cor(stats_dt, use = "complete.obs")
+head(round(M,2))
+corrplot(M, method="circle")
+
+scatter.smooth(x=stats_dt$version, y=stats_dt$publication)
+
+regression <- lm(publications ~ version, data=stats_dt)
+regression
+summary(regression)
+```
+
+Versions predicting downloads/publications?
+are downloads unique?
+```{r pressure}
+g <- ggplot(agencies_dt,aes(x=reorder(Funding_Agency,-Average_Publications_per_Dataset),y=Average_Publications_per_Dataset))
+g + geom_bar(stat="identity",fill="#E57200") + 
+  geom_text(aes(label=Average_Publications_per_Dataset),color="black",vjust=1.2,size=5) +
+  #theme_minimal() +
+  ggtitle("Average Publications per Dataset by Top Funding Agencies")+
+  xlab("Funding Agency") + ylab("Average Publicatiions per Dataset") +
+  theme(axis.text.x = element_text(size=10, angle=35,vjust =0.5),
+        axis.title.x = element_text(size=12),
+        axis.title.y = element_text(size=12),
+        plot.title = element_text(hjust=0.5,size=15,face="bold"),
+        legend.position="none")
+
+```
+
